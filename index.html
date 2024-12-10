@@ -36,10 +36,11 @@
     </div>
     <script>
         const apiKey = "9c05c883c2f267d398e13fed8b92ca3d";
-        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=warangal";
-    
-        async function checkweather() {
-            const response = await fetch(apiUrl + `&appid=${apiKey}`);
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
+        const searchbox = document.querySelector(".search input");
+        const searchbtn = document.querySelector(".search button");
+        async function checkweather(city) {
+            const response = await fetch(apiUrl + city +`&appid=${apiKey}`);
             const data = await response.json();
             console.log(data);
 
@@ -49,8 +50,9 @@
             document.querySelector(".wind").innerHTML = data.wind.speed+ "km/h";
 
         }
-    
-        checkweather();
+        searchbtn.addEventListener("click",()=>{
+            checkweather(searchbox.value)
+        })
     </script>
     
     
